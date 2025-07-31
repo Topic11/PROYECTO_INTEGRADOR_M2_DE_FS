@@ -1,0 +1,56 @@
+version: 2
+
+models:
+  - name: dim_clientes
+    description: "Dimensión que contiene los atributos de los clientes."
+    columns:
+      - name: cliente_id
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_productos
+    description: "Dimensión de productos con historial de precios (SCD Tipo 2)."
+    columns:
+      - name: producto_id
+        tests:
+          - not_null
+      # Nota: No podemos testear 'unique' en producto_id porque la SCD Tipo 2 crea duplicados intencionalmente.
+
+  - name: dim_metodos_pago
+    description: "Catálogo de los métodos de pago."
+    columns:
+      - name: metodo_pago_id
+        tests:
+          - unique
+          - not_null
+
+  - name: fact_ventas
+    description: "Tabla de hechos con cada línea de producto por orden."
+    columns:
+      - name: venta_id
+        tests:
+          - unique
+          - not_null
+      - name: orden_id
+        tests:
+          - not_null
+      - name: producto_id
+        tests:
+          - not_null
+          # Test de Integridad Referencial: cada producto_id en fct_ventas debe existir en dim_productos.
+          - relationships:
+              to: ref('dim_productos')
+              field: producto_id
+      - name: cliente_id
+        tests:
+          - not_null
+          # Test de Integridad Referencial: cada cliente_id en fct_ventas debe existir en dim_clientes.
+          - relationships:
+              to: ref('dim_clientes')
+              field: cliente_id
+      - name: estado_orden
+        tests:
+          # Test de Valores Aceptados: el estado solo puede ser uno de estos valores.
+          - accepted_values:
+              values: ['Completado', 'Pendiente', 'Cancelado','Enviado']

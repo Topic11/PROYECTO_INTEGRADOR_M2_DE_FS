@@ -1,0 +1,13 @@
+# --- Core Data Libraries ---
+pandas
+sqlalchemy
+
+# --- Database Drivers ---
+psycopg2
+
+
+# --- Environment
+python-dotenv
+
+# --- Visualization ---
+streamlit

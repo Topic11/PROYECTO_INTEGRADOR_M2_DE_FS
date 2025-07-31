@@ -1,0 +1,31 @@
+version: 2
+
+sources:
+  - name: ecommerce_db
+    database: ecommercedb_new
+    schema: public
+    description: "Fuente de datos crudos desde la base de datos transaccional de PostgreSQL. Contiene las tablas operacionales del e-commerce sin ninguna transformación."
+    
+    tables:
+      - name: usuarios
+        description: "Tabla con la información de los usuarios registrados en la plataforma."
+      - name: categorias
+        description: "Catálogo de las categorías de productos."
+      - name: productos
+        description: "Catálogo de productos, incluyendo precio y stock."
+      - name: ordenes
+        description: "Registros de las órdenes de compra realizadas por los usuarios."
+      - name: detalleordenes
+        description: "Líneas de detalle para cada orden, especificando producto y cantidad."
+      - name: direccionesenvio
+        description: "Direcciones de envío asociadas a los usuarios."
+      - name: carrito
+        description: "Items que los usuarios han agregado a sus carritos de compra."
+      - name: metodospago
+        description: "Catálogo de los métodos de pago disponibles."
+      - name: ordenesmetodospago
+        description: "Tabla de relación entre las órdenes y los métodos de pago utilizados."
+      - name: reseñasproductos
+        description: "Reseñas y calificaciones dejadas por los usuarios para los productos."
+      - name: historialpagos
+        description: "Registro de todas las transacciones de pago, incluyendo su estado."

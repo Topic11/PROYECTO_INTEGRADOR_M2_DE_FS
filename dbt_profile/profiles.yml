@@ -1,0 +1,12 @@
+ecommerce_dbt:
+  outputs:
+    dev:
+      dbname: ecommercedb_new
+      host: db
+      pass: K1t4hR7q#x9L
+      port: 5432
+      schema: public
+      threads: 4
+      type: postgres
+      user: fs_admin
+  target: dev
